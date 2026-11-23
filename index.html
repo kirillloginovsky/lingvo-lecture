@@ -1268,7 +1268,7 @@
             Скачайте методический навигатор для подготовки к семинару:
           </p>
 
-          <a id="btn-download-pdf" href="konspekt.pdf" download="Классификация_языков_Навигатор.pdf" class="btn-download-pdf">
+          <a id="btn-download-pdf" href="konspekt.pdf" download="Классификация_языков_Навигатор.pdf" target="_blank" class="btn-download-pdf">
             <span>Скачать навигатор (PDF)</span>
             <span style="font-size:20px;">💙🍒</span>
           </a>
@@ -1516,7 +1516,7 @@
     </section>
 
     <footer class="app-footer">
-      <p>Стенд обновляется каждые 2.5 сек • <a href="?">Открыть режим студента</a></p>
+      <p>Стенд обновляется каждую секунду (Live Sync 1 сек) • <a href="?">Открыть режим студента</a></p>
     </footer>
   </div>
 
@@ -1548,6 +1548,7 @@
     let currentStep = 1;
     let currentProjTab = 1;
     let lastDownloadCount = 0;
+    let isProjectorFirstSync = true;
     let showCorrect = false;
 
     /* ========================================================================
@@ -1667,7 +1668,11 @@
       const btnDownload = document.getElementById('btn-download-pdf');
       btnDownload.addEventListener('click', (e) => {
         const rect = btnDownload.getBoundingClientRect();
-        launchHearts(35, rect.left + rect.width / 2, rect.top + rect.height / 2);
+        const bx = rect ? (rect.left + rect.width / 2) : (window.innerWidth / 2);
+        const by = rect ? (rect.top + rect.height / 2) : (window.innerHeight * 0.7);
+        // Запуск мощного салюта сердечек из кнопки и снизу экрана
+        launchHearts(30, bx, by);
+        launchHearts(30);
 
         document.getElementById('download-msg').style.display = 'block';
         btnDownload.style.pointerEvents = 'none';
@@ -1799,7 +1804,7 @@
       });
 
       syncProjector();
-      setInterval(syncProjector, 2500);
+      setInterval(syncProjector, 1000); // Быстрое обновление каждую 1 секунду
     }
 
     function switchProjectorTab(tabIndex) {
@@ -1845,13 +1850,13 @@
       const bigCounter = document.getElementById('proj-big-downloads-num');
       if (bigCounter) bigCounter.textContent = downloads;
 
-      if (downloads > lastDownloadCount) {
-        if (lastDownloadCount > 0) {
-          const diff = Math.min(downloads - lastDownloadCount, 25);
-          launchHearts(diff * 14);
-        }
+      // Салют двухцветных сердечек при новом скачивании студентами
+      if (isProjectorFirstSync) {
         lastDownloadCount = downloads;
-      } else if (lastDownloadCount === 0) {
+        isProjectorFirstSync = false;
+      } else if (downloads > lastDownloadCount) {
+        const diff = Math.min(downloads - lastDownloadCount, 25);
+        launchHearts(Math.max(30, diff * 15));
         lastDownloadCount = downloads;
       }
 
