@@ -1,0 +1,1906 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <title>Введение в языкознание • Тема 7: Классификация языков</title>
+  
+  <style>
+    /* ==========================================================================
+       1. СБРОС И СТРОГАЯ ЗАЩИТА ОТ ГОРИЗОНТАЛЬНОГО СКРОЛЛА
+       ========================================================================== */
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    html {
+      width: 100%;
+      max-width: 100%;
+      overflow-x: hidden;
+      -webkit-text-size-adjust: 100%;
+      text-size-adjust: 100%;
+    }
+
+    body {
+      width: 100%;
+      max-width: 100vw;
+      min-height: 100dvh;
+      overflow-x: hidden;
+      overscroll-behavior-x: none;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      color: #2E4060;
+      line-height: 1.5;
+      font-size: 15px;
+      position: relative;
+
+      /* ========================================================================
+         АТМОСФЕРНЫЙ СТУДИЙНЫЙ ФОН С МЯГКИМИ СВЕТОВЫМИ ПЯТНАМИ (AMBIENT GLOW)
+         Никакого плоского «ИИ-шаблона»: глубина, теплота и живой свет
+         ======================================================================== */
+      background-color: #F5E8E4;
+      background-image: 
+        radial-gradient(circle at 10% 12%, rgba(244, 218, 212, 0.95) 0%, transparent 45%),
+        radial-gradient(circle at 88% 8%, rgba(221, 140, 150, 0.45) 0%, transparent 40%),
+        radial-gradient(circle at 50% 45%, rgba(255, 248, 246, 0.8) 0%, transparent 55%),
+        radial-gradient(circle at 15% 85%, rgba(221, 140, 150, 0.4) 0%, transparent 45%),
+        radial-gradient(circle at 85% 85%, rgba(46, 64, 96, 0.14) 0%, transparent 50%);
+      background-attachment: fixed;
+      background-size: cover;
+    }
+
+    p, span, h1, h2, h3, h4, label {
+      overflow-wrap: break-word;
+      word-break: break-word;
+      hyphens: auto;
+    }
+
+    /* ==========================================================================
+       2. ДИЗАЙН-ПАЛИТРА: Almond, Dull Pink, Rhino, Cherry + Система свечений
+       ========================================================================== */
+    :root {
+      --almond: #F4DAD4;           /* Нежный пастельный миндаль */
+      --almond-border: #E8BFB7;
+      --dull-pink: #DD8C96;        /* Пыльная роза с референса */
+      --dull-pink-glow: rgba(221, 140, 150, 0.4);
+      --rhino: #2E4060;            /* Глубокий сланцево-синий */
+      --rhino-glow: rgba(46, 64, 96, 0.25);
+      
+      --cherry: #8B112C;           /* Спелая вишня */
+      --cherry-glow: rgba(139, 17, 44, 0.35);
+      --cherry-light: #FDF0F2;
+      --cherry-border: #E8A8B6;
+
+      --card-bg: rgba(255, 255, 255, 0.92); /* Эффект пастельного матового стекла */
+      --text-main: #2E4060;
+      --text-muted: #64738C;
+      --border: rgba(221, 140, 150, 0.35);
+      
+      --radius-sm: 8px;
+      --radius-md: 14px;
+      --radius-lg: 20px;
+    }
+
+    /* ==========================================================================
+       3. СТРУКТУРА СТРАНИЦЫ
+       ========================================================================== */
+    .view-container {
+      width: 100%;
+      max-width: 100%;
+    }
+
+    .student-view {
+      width: 100%;
+      max-width: 480px;
+      margin: 0 auto;
+      padding: 16px 14px 44px;
+    }
+
+    .projector-view {
+      width: 100%;
+      max-width: 1240px;
+      margin: 0 auto;
+      padding: 24px 28px 48px;
+    }
+
+    /* ==========================================================================
+       4. СВЕТЯЩИЕСЯ КАРТОЧКИ (FROSTED GLASS & AMBIENT RIM GLOW)
+       ========================================================================== */
+    .glowing-card {
+      background: var(--card-bg);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border-radius: var(--radius-lg);
+      border: 1px solid rgba(255, 255, 255, 0.85);
+      /* Трёхслойная мягкая подсветка контура */
+      box-shadow: 
+        0 14px 34px -6px rgba(46, 64, 96, 0.1),
+        0 0 0 1px rgba(221, 140, 150, 0.25),
+        0 0 25px rgba(244, 218, 212, 0.7);
+      position: relative;
+    }
+
+    .header-card {
+      padding: 18px 20px;
+      margin-bottom: 16px;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 4px 10px;
+      border-radius: 9999px;
+      font-size: 11.5px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      background: #F8E4DF;
+      color: var(--rhino);
+      border: 1px solid #DFB5AD;
+      box-shadow: 0 0 10px rgba(244, 218, 212, 0.6);
+      margin-bottom: 8px;
+    }
+
+    .badge-cherry {
+      background: var(--cherry-light);
+      color: var(--cherry);
+      border-color: var(--cherry-border);
+      box-shadow: 0 0 10px rgba(221, 140, 150, 0.3);
+    }
+
+    .badge-live {
+      background: #FEECEB;
+      color: #9E1B32;
+      border-color: #FAD3D0;
+    }
+
+    .badge-live::before {
+      content: '';
+      display: inline-block;
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #8B112C;
+      box-shadow: 0 0 8px #8B112C;
+      animation: pulse 1.8s infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.4; transform: scale(0.85); }
+    }
+
+    .header-card h1 {
+      font-size: 1.25rem;
+      font-weight: 800;
+      color: var(--rhino);
+      line-height: 1.3;
+      margin-bottom: 4px;
+    }
+
+    .header-card p {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+    }
+
+    /* Индикатор шагов */
+    .stepper {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 18px;
+      padding: 0 4px;
+      position: relative;
+    }
+
+    .step-node {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 5px;
+      cursor: pointer;
+      position: relative;
+      z-index: 2;
+    }
+
+    .step-circle {
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.95);
+      border: 2px solid rgba(221, 140, 150, 0.4);
+      color: var(--text-muted);
+      font-size: 13px;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+      box-shadow: 0 2px 6px rgba(46, 64, 96, 0.05);
+    }
+
+    .step-node.active .step-circle {
+      border-color: var(--rhino);
+      background: var(--rhino);
+      color: #FFFFFF;
+      transform: scale(1.12);
+      box-shadow: 0 0 16px var(--rhino-glow), 0 0 0 4px var(--almond);
+    }
+
+    .step-node.completed .step-circle {
+      border-color: var(--cherry);
+      background: var(--cherry);
+      color: #FFFFFF;
+      box-shadow: 0 0 12px var(--cherry-glow);
+    }
+
+    .step-label {
+      font-size: 11px;
+      font-weight: 700;
+      color: #55647C;
+      transition: color 0.2s;
+    }
+
+    .step-node.active .step-label {
+      color: var(--rhino);
+    }
+
+    .stepper-line {
+      position: absolute;
+      top: 17px;
+      left: 20px;
+      right: 20px;
+      height: 2px;
+      background: rgba(221, 140, 150, 0.3);
+      z-index: 1;
+    }
+
+    .stepper-progress {
+      position: absolute;
+      top: 17px;
+      left: 20px;
+      height: 2px;
+      background: var(--rhino);
+      box-shadow: 0 0 8px var(--rhino-glow);
+      z-index: 1;
+      width: 0%;
+      transition: width 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    /* ==========================================================================
+       5. КАРТОЧКИ СЛАЙДОВ И АНИМАЦИИ
+       ========================================================================== */
+    .step-slide {
+      display: none;
+    }
+
+    .step-slide.active {
+      display: block;
+      animation: slideInUp 0.35s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+
+    @keyframes slideInUp {
+      from {
+        opacity: 0;
+        transform: translateY(12px) scale(0.985);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
+    }
+
+    .quiz-card {
+      padding: 20px 18px;
+      margin-bottom: 16px;
+    }
+
+    .quiz-card-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 12px;
+    }
+
+    .quiz-num-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--rhino);
+    }
+
+    .quiz-question-title {
+      font-size: 1.05rem;
+      font-weight: 800;
+      color: var(--rhino);
+      margin-bottom: 8px;
+    }
+
+    .quiz-condition-box {
+      background: rgba(255, 245, 243, 0.85);
+      border-left: 4px solid var(--cherry);
+      padding: 12px 14px;
+      border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+      font-size: 13.5px;
+      color: var(--rhino);
+      line-height: 1.45;
+      margin-bottom: 16px;
+      border-top: 1px solid rgba(221, 140, 150, 0.25);
+      border-right: 1px solid rgba(221, 140, 150, 0.25);
+      border-bottom: 1px solid rgba(221, 140, 150, 0.25);
+      box-shadow: 0 0 14px rgba(244, 218, 212, 0.5);
+    }
+
+    /* ==========================================================================
+       6. ВЕКТОРНЫЕ ИЛЛЮСТРАЦИИ (SVG DIAGRAMS)
+       ========================================================================== */
+    .illustration-box {
+      width: 100%;
+      background: linear-gradient(145deg, rgba(255, 255, 255, 0.95), rgba(253, 245, 243, 0.9));
+      border: 1px solid rgba(221, 140, 150, 0.3);
+      border-radius: var(--radius-md);
+      padding: 14px 10px;
+      margin-bottom: 18px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.8), 0 4px 14px rgba(46, 64, 96, 0.04);
+    }
+
+    .illustration-box svg {
+      width: 100%;
+      max-width: 380px;
+      height: auto;
+      display: block;
+    }
+
+    .illustration-caption {
+      font-size: 11.5px;
+      font-weight: 700;
+      color: var(--text-muted);
+      margin-top: 8px;
+      text-align: center;
+    }
+
+    /* ==========================================================================
+       7. ОПЦИИ ОТВЕТА С ЭФФЕКТОМ ПОДСВЕТКИ (GLOW ON HOVER & ACTIVE)
+       ========================================================================== */
+    .options-group {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-bottom: 18px;
+    }
+
+    .option-btn {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      padding: 13px 15px;
+      min-height: 52px;
+      background: rgba(255, 255, 255, 0.95);
+      border: 1.5px solid rgba(221, 140, 150, 0.35);
+      border-radius: var(--radius-md);
+      font-size: 14px;
+      line-height: 1.35;
+      color: var(--rhino);
+      cursor: pointer;
+      text-align: left;
+      transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+      user-select: none;
+      position: relative;
+      box-shadow: 0 2px 8px rgba(46, 64, 96, 0.03);
+    }
+
+    /* Подсветка при наведении */
+    .option-btn:hover:not(.locked) {
+      border-color: var(--dull-pink);
+      background: #FFFFFF;
+      box-shadow: 
+        0 4px 18px rgba(221, 140, 150, 0.3),
+        0 0 14px rgba(244, 218, 212, 0.7);
+      transform: translateY(-2px);
+    }
+
+    .option-btn:active:not(.locked) {
+      transform: scale(0.985);
+    }
+
+    /* Яркая неоново-пастельная подсветка при выборе */
+    .option-btn.selected {
+      border-color: var(--rhino);
+      background: #FFFFFF;
+      font-weight: 600;
+      color: var(--rhino);
+      box-shadow: 
+        0 0 0 2px var(--rhino),
+        0 6px 20px rgba(46, 64, 96, 0.18),
+        0 0 24px rgba(221, 140, 150, 0.45); /* Мягкое свечение ореола */
+      animation: optionSelectPop 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    @keyframes optionSelectPop {
+      0% { transform: scale(0.97); }
+      50% { transform: scale(1.015); }
+      100% { transform: scale(1); }
+    }
+
+    .option-letter {
+      width: 24px;
+      height: 24px;
+      min-width: 24px;
+      border-radius: 50%;
+      background: #F8E4DF;
+      color: var(--rhino);
+      font-weight: 700;
+      font-size: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.2s;
+    }
+
+    .option-btn.selected .option-letter {
+      background: var(--rhino);
+      color: #FFFFFF;
+      box-shadow: 0 0 8px var(--rhino-glow);
+    }
+
+    /* ==========================================================================
+       8. СТАТИСТИКА И ОБЪЯСНЕНИЕ
+       ========================================================================== */
+    .answer-feedback-box {
+      display: none;
+      background: rgba(255, 245, 243, 0.9);
+      border: 1px solid rgba(221, 140, 150, 0.4);
+      border-radius: var(--radius-md);
+      padding: 14px;
+      margin-bottom: 18px;
+      box-shadow: 0 0 16px rgba(244, 218, 212, 0.5);
+      animation: fadeIn 0.3s ease;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(6px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .feedback-title {
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--rhino);
+      margin-bottom: 8px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .feedback-explanation {
+      font-size: 13px;
+      color: var(--rhino);
+      line-height: 1.4;
+      margin-bottom: 12px;
+      padding-bottom: 10px;
+      border-bottom: 1px dashed rgba(221, 140, 150, 0.35);
+    }
+
+    .mini-chart {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .mini-chart-row {
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+    }
+
+    .mini-chart-info {
+      display: flex;
+      justify-content: space-between;
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--text-muted);
+    }
+
+    .mini-progress-track {
+      width: 100%;
+      height: 12px;
+      background: #EED4CF;
+      border-radius: 9999px;
+      overflow: hidden;
+    }
+
+    .mini-progress-fill {
+      height: 100%;
+      width: 0%;
+      background: var(--rhino);
+      border-radius: 9999px;
+      transition: width 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .mini-progress-fill.correct {
+      background: var(--cherry);
+      box-shadow: 0 0 10px var(--cherry-glow);
+    }
+
+    /* ==========================================================================
+       9. КНОПКИ НАВИГАЦИИ
+       ========================================================================== */
+    .action-btn-row {
+      display: flex;
+      gap: 10px;
+    }
+
+    .btn-nav {
+      flex: 1;
+      min-height: 48px;
+      padding: 12px 18px;
+      font-size: 14.5px;
+      font-weight: 700;
+      border-radius: var(--radius-md);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+      border: none;
+    }
+
+    .btn-next {
+      background: var(--rhino);
+      color: #FFFFFF;
+      box-shadow: 0 4px 14px rgba(46, 64, 96, 0.25), 0 0 14px var(--rhino-glow);
+    }
+
+    .btn-next:hover:not(:disabled) {
+      background: #233452;
+      transform: translateY(-1px);
+      box-shadow: 0 6px 18px rgba(46, 64, 96, 0.35), 0 0 20px var(--rhino-glow);
+    }
+
+    .btn-next:active:not(:disabled) {
+      transform: scale(0.985);
+    }
+
+    .btn-next:disabled {
+      opacity: 0.45;
+      cursor: not-allowed;
+      box-shadow: none;
+    }
+
+    .btn-prev {
+      background: rgba(255, 255, 255, 0.95);
+      color: var(--text-muted);
+      border: 1px solid rgba(221, 140, 150, 0.35);
+      max-width: 110px;
+    }
+
+    .btn-prev:hover {
+      background: #FAF2EF;
+      color: var(--rhino);
+    }
+
+    /* ==========================================================================
+       10. ФИНАЛЬНЫЙ ЭКРАН (СКАЧИВАНИЕ PDF + ПУЛЬСИРУЮЩАЯ ПОДСВЕТКА)
+       ========================================================================== */
+    .finish-card {
+      padding: 26px 20px;
+      text-align: center;
+      overflow: hidden;
+    }
+
+    .finish-icon {
+      font-size: 44px;
+      margin-bottom: 10px;
+      display: inline-block;
+      animation: finishBounce 1.5s infinite;
+    }
+
+    @keyframes finishBounce {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-6px); }
+    }
+
+    .finish-card h2 {
+      font-size: 1.35rem;
+      font-weight: 800;
+      color: var(--rhino);
+      margin-bottom: 6px;
+    }
+
+    .finish-card p {
+      font-size: 13.5px;
+      color: var(--text-muted);
+      margin-bottom: 20px;
+      line-height: 1.45;
+    }
+
+    /* Кнопка с эффектным вишнёво-синим свечением */
+    .btn-download-pdf {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      width: 100%;
+      min-height: 54px;
+      padding: 14px 22px;
+      font-size: 15px;
+      font-weight: 700;
+      color: #FFFFFF;
+      background: linear-gradient(135deg, var(--rhino) 0%, #1f2f4a 45%, var(--cherry) 100%);
+      border: none;
+      border-radius: var(--radius-md);
+      text-decoration: none;
+      cursor: pointer;
+      box-shadow: 
+        0 8px 24px -2px rgba(46, 64, 96, 0.35),
+        0 0 25px rgba(139, 17, 44, 0.35),
+        0 0 45px rgba(221, 140, 150, 0.3);
+      transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+      animation: buttonAura 3s infinite ease-in-out;
+    }
+
+    @keyframes buttonAura {
+      0%, 100% {
+        box-shadow: 0 8px 24px -2px rgba(46, 64, 96, 0.35), 0 0 20px rgba(139, 17, 44, 0.3);
+      }
+      50% {
+        box-shadow: 0 10px 30px -2px rgba(46, 64, 96, 0.45), 0 0 40px rgba(221, 140, 150, 0.55), 0 0 55px rgba(139, 17, 44, 0.45);
+      }
+    }
+
+    .btn-download-pdf:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 30px -2px rgba(46, 64, 96, 0.45), 0 0 45px rgba(139, 17, 44, 0.5);
+    }
+
+    .btn-download-pdf:active {
+      transform: scale(0.985);
+    }
+
+    .download-success-msg {
+      display: none;
+      margin-top: 14px;
+      font-size: 13.5px;
+      color: var(--cherry);
+      font-weight: 700;
+      animation: fadeIn 0.3s ease;
+    }
+
+    /* ==========================================================================
+       11. ЭКРАН ПРОЕКТОРА (?screen=projector)
+       ========================================================================== */
+    .projector-nav-tabs {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 20px;
+      overflow-x: auto;
+      padding-bottom: 4px;
+    }
+
+    .proj-tab-btn {
+      padding: 10px 18px;
+      background: rgba(255, 255, 255, 0.95);
+      border: 1px solid rgba(221, 140, 150, 0.35);
+      border-radius: var(--radius-md);
+      font-size: 13.5px;
+      font-weight: 700;
+      color: var(--text-muted);
+      cursor: pointer;
+      white-space: nowrap;
+      transition: all 0.2s;
+      box-shadow: 0 2px 6px rgba(46, 64, 96, 0.04);
+    }
+
+    .proj-tab-btn:hover {
+      border-color: var(--dull-pink);
+      color: var(--rhino);
+      box-shadow: 0 0 12px rgba(221, 140, 150, 0.3);
+    }
+
+    .proj-tab-btn.active {
+      background: var(--rhino);
+      border-color: var(--rhino);
+      color: #FFFFFF;
+      box-shadow: 0 4px 14px rgba(46, 64, 96, 0.25), 0 0 15px var(--rhino-glow);
+    }
+
+    .projector-header {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 24px;
+      padding: 22px 28px;
+    }
+
+    .projector-title h1 {
+      font-size: 1.7rem;
+      font-weight: 800;
+      color: var(--rhino);
+      letter-spacing: -0.02em;
+    }
+
+    .projector-title p {
+      font-size: 0.95rem;
+      color: var(--text-muted);
+    }
+
+    .metric-badge {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 18px;
+      background: rgba(255, 245, 243, 0.95);
+      border: 1px solid rgba(221, 140, 150, 0.35);
+      border-radius: var(--radius-md);
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--rhino);
+      box-shadow: 0 0 14px rgba(244, 218, 212, 0.6);
+    }
+
+    .metric-value {
+      font-size: 1.45rem;
+      font-weight: 800;
+      color: var(--rhino);
+    }
+
+    .metric-heart {
+      color: var(--cherry);
+    }
+
+    .btn-toggle-answers {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 18px;
+      background: #FFFFFF;
+      border: 1.5px solid var(--rhino);
+      color: var(--rhino);
+      border-radius: var(--radius-md);
+      font-size: 14px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      box-shadow: 0 2px 6px rgba(46, 64, 96, 0.08);
+    }
+
+    .btn-toggle-answers:hover {
+      box-shadow: 0 0 14px var(--rhino-glow);
+    }
+
+    .btn-toggle-answers.active {
+      background: var(--cherry);
+      border-color: var(--cherry);
+      color: #FFFFFF;
+      box-shadow: 0 0 16px var(--cherry-glow);
+    }
+
+    .projector-focus-slide {
+      padding: 32px 36px;
+      display: none;
+    }
+
+    .projector-focus-slide.active {
+      display: block;
+      animation: fadeIn 0.3s ease;
+    }
+
+    .focus-grid {
+      display: grid;
+      grid-template-columns: 1fr 1.1fr;
+      gap: 36px;
+      align-items: center;
+    }
+
+    @media (max-width: 900px) {
+      .focus-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .focus-left h2 {
+      font-size: 1.6rem;
+      font-weight: 800;
+      color: var(--rhino);
+      margin-bottom: 12px;
+      line-height: 1.3;
+    }
+
+    .focus-condition {
+      font-size: 1.05rem;
+      color: var(--rhino);
+      background: rgba(255, 245, 243, 0.9);
+      padding: 16px 18px;
+      border-left: 4px solid var(--cherry);
+      border-radius: 0 var(--radius-md) var(--radius-md) 0;
+      margin-bottom: 20px;
+      line-height: 1.5;
+      border-top: 1px solid rgba(221, 140, 150, 0.25);
+      border-right: 1px solid rgba(221, 140, 150, 0.25);
+      border-bottom: 1px solid rgba(221, 140, 150, 0.25);
+      box-shadow: 0 0 16px rgba(244, 218, 212, 0.5);
+    }
+
+    .focus-chart-container {
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+    }
+
+    .focus-chart-row {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .focus-chart-info {
+      display: flex;
+      justify-content: space-between;
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--rhino);
+    }
+
+    .focus-chart-count {
+      color: var(--text-muted);
+      font-weight: 700;
+    }
+
+    .focus-progress-track {
+      width: 100%;
+      height: 28px;
+      background: #EED4CF;
+      border-radius: 9999px;
+      overflow: hidden;
+      box-shadow: inset 0 1px 3px rgba(46, 64, 96, 0.1);
+    }
+
+    .focus-progress-fill {
+      height: 100%;
+      width: 0%;
+      background: linear-gradient(90deg, var(--rhino), #4A6590);
+      border-radius: 9999px;
+      transition: width 0.7s cubic-bezier(0.16, 1, 0.3, 1), background-color 0.3s;
+    }
+
+    .focus-progress-fill.correct {
+      background: linear-gradient(90deg, var(--cherry), #B52A47) !important;
+      box-shadow: 0 0 16px var(--cherry-glow);
+    }
+
+    .correct-badge-proj {
+      display: none;
+      font-size: 12px;
+      padding: 2px 8px;
+      border-radius: 6px;
+      background: var(--cherry-light);
+      color: var(--cherry);
+      border: 1px solid var(--cherry-border);
+      box-shadow: 0 0 8px rgba(221, 140, 150, 0.4);
+      margin-left: 8px;
+    }
+
+    .show-correct .correct-badge-proj {
+      display: inline-block;
+    }
+
+    .proj-final-slide {
+      text-align: center;
+      padding: 48px 24px;
+    }
+
+    .proj-big-counter {
+      font-size: 5rem;
+      font-weight: 900;
+      color: var(--cherry);
+      line-height: 1;
+      margin: 20px 0;
+      text-shadow: 0 0 35px var(--cherry-glow);
+      animation: heartPulse 1.6s infinite ease-in-out;
+    }
+
+    @keyframes heartPulse {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.06); }
+    }
+
+    /* ==========================================================================
+       12. ХОЛСТ СЕРДЕЧЕК (CANVAS OVERLAY) СО СВЕТЯЩИМСЯ ОРЕОЛОМ
+       ========================================================================== */
+    #hearts-canvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      pointer-events: none;
+      z-index: 999999;
+    }
+
+    .app-footer {
+      text-align: center;
+      margin-top: 28px;
+      font-size: 12px;
+      color: #55647C;
+    }
+
+    .app-footer a {
+      color: var(--rhino);
+      text-decoration: none;
+      font-weight: 700;
+    }
+
+    .app-footer a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Полноэкранный холст для салюта двухцветных сердечек со свечением -->
+  <canvas id="hearts-canvas"></canvas>
+
+  <!-- ========================================================================
+       ЭКРАН СТУДЕНТА (Пошаговый режим: Вопрос 1 -> Вопрос 2 -> Вопрос 3 -> Финал)
+       ======================================================================== -->
+  <div id="student-screen" class="view-container student-view" style="display: none;">
+    
+    <header class="header-card glowing-card">
+      <div class="badge">Введение в языкознание • Тема 7</div>
+      <h1>Лингвистический детектив</h1>
+      <p>Генеалогия против типологии • Интерактивный практикум</p>
+    </header>
+
+    <!-- Степпер этапов -->
+    <nav class="stepper" aria-label="Прогресс по вопросам">
+      <div class="stepper-line"></div>
+      <div id="stepper-progress" class="stepper-progress"></div>
+
+      <div class="step-node active" data-step="1" onclick="goToStep(1)">
+        <div class="step-circle">1</div>
+        <div class="step-label">Задача 1</div>
+      </div>
+      <div class="step-node" data-step="2" onclick="goToStep(2)">
+        <div class="step-circle">2</div>
+        <div class="step-label">Задача 2</div>
+      </div>
+      <div class="step-node" data-step="3" onclick="goToStep(3)">
+        <div class="step-circle">3</div>
+        <div class="step-label">Задача 3</div>
+      </div>
+      <div class="step-node" data-step="4" onclick="goToStep(4)">
+        <div class="step-circle">💙</div>
+        <div class="step-label">Конспект</div>
+      </div>
+    </nav>
+
+    <!-- СЛАЙД 1: ЗАДАЧА 1 -->
+    <main>
+      <section id="step-1" class="step-slide active" data-q="q1">
+        <div class="quiz-card glowing-card">
+          <div class="quiz-card-header">
+            <span class="quiz-num-badge">🔍 Задача 1 из 3</span>
+            <span class="badge badge-cherry">Морфология</span>
+          </div>
+          
+          <h2 class="quiz-question-title">Морфологическая диагностика</h2>
+          
+          <div class="quiz-condition-box">
+            Дана парадигма из татарского языка:<br>
+            <strong>кыз</strong> (девочка) → <strong>кыз-лар</strong> (девочки) → <strong>кыз-лар-га</strong> (девочкам).<br>
+            <em>Определите морфологический тип языка:</em>
+          </div>
+
+          <!-- Иллюстрация 1: Морфемный поезд агглютинации -->
+          <div class="illustration-box">
+            <svg viewBox="0 0 360 85" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <!-- Вагон 1: Корень (Rhino) -->
+              <rect x="10" y="15" width="95" height="45" rx="8" fill="#2E4060" />
+              <text x="57" y="38" fill="#FFFFFF" font-size="13" font-weight="bold" text-anchor="middle">кыз</text>
+              <text x="57" y="52" fill="#F4DAD4" font-size="9" text-anchor="middle">КОРЕНЬ (девочка)</text>
+              
+              <!-- Соединитель 1 (Dull Pink) -->
+              <line x1="105" y1="37" x2="125" y2="37" stroke="#DD8C96" stroke-width="4" stroke-dasharray="2 2"/>
+              <circle cx="115" cy="37" r="4" fill="#DD8C96"/>
+
+              <!-- Вагон 2: Мн. число (Вишнёвый) -->
+              <rect x="125" y="15" width="95" height="45" rx="8" fill="#8B112C" />
+              <text x="172" y="38" fill="#FFFFFF" font-size="13" font-weight="bold" text-anchor="middle">-лар</text>
+              <text x="172" y="52" fill="#FCECEF" font-size="9" text-anchor="middle">АФФИКС МН. Ч.</text>
+
+              <!-- Соединитель 2 (Dull Pink) -->
+              <line x1="220" y1="37" x2="240" y2="37" stroke="#DD8C96" stroke-width="4" stroke-dasharray="2 2"/>
+              <circle cx="230" cy="37" r="4" fill="#DD8C96"/>
+
+              <!-- Вагон 3: Дат. падеж (Dull Pink) -->
+              <rect x="240" y="15" width="105" height="45" rx="8" fill="#DD8C96" />
+              <text x="292" y="38" fill="#FFFFFF" font-size="13" font-weight="bold" text-anchor="middle">-га</text>
+              <text x="292" y="52" fill="#FDF4F5" font-size="9" text-anchor="middle">АФФИКС ДАТ. ПАД.</text>
+            </svg>
+            <div class="illustration-caption">«Агглютинация»: однозначные аффиксы нанизываются цепочкой как вагончики</div>
+          </div>
+
+          <!-- Варианты ответа -->
+          <div class="options-group">
+            <button type="button" class="option-btn" data-opt="opt1" onclick="selectStudentOption('q1', 'opt1', this)">
+              <span class="option-letter">A</span>
+              <span>Агглютинативный (однозначные аффиксы нанизываются цепочкой)</span>
+            </button>
+            <button type="button" class="option-btn" data-opt="opt2" onclick="selectStudentOption('q1', 'opt2', this)">
+              <span class="option-letter">B</span>
+              <span>Флективный (одно окончание несёт пучок значений)</span>
+            </button>
+            <button type="button" class="option-btn" data-opt="opt3" onclick="selectStudentOption('q1', 'opt3', this)">
+              <span class="option-letter">C</span>
+              <span>Изолирующий (грамматика выражается только порядком слов)</span>
+            </button>
+          </div>
+
+          <!-- Статистика и комментарий после выбора -->
+          <div id="feedback-q1" class="answer-feedback-box">
+            <div class="feedback-title">
+              <span>📊 Распределение ответов аудитории:</span>
+            </div>
+            
+            <div class="mini-chart">
+              <div class="mini-chart-row" data-opt="opt1">
+                <div class="mini-chart-info"><span>Агглютинативный (A)</span><span class="pct">0%</span></div>
+                <div class="mini-progress-track"><div class="mini-progress-fill correct" style="width: 0%;"></div></div>
+              </div>
+              <div class="mini-chart-row" data-opt="opt2">
+                <div class="mini-chart-info"><span>Флективный (B)</span><span class="pct">0%</span></div>
+                <div class="mini-progress-track"><div class="mini-progress-fill" style="width: 0%;"></div></div>
+              </div>
+              <div class="mini-chart-row" data-opt="opt3">
+                <div class="mini-chart-info"><span>Изолирующий (C)</span><span class="pct">0%</span></div>
+                <div class="mini-progress-track"><div class="mini-progress-fill" style="width: 0%;"></div></div>
+              </div>
+            </div>
+
+            <div class="feedback-explanation" style="margin-top:12px;">
+              💡 <strong>Разбор:</strong> В татарском языке к неизменяемому корню <em>кыз</em> приклеиваются строго разграниченные суффиксы: <em>-лар</em> выражает только множественность, а <em>-га</em> — только падеж. Это эталонная агглютинация!
+            </div>
+          </div>
+
+          <!-- Навигация -->
+          <div class="action-btn-row">
+            <button id="btn-next-1" class="btn-nav btn-next" onclick="goToStep(2)" disabled>
+              <span>К вопросу 2 →</span>
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <!-- СЛАЙД 2: ЗАДАЧА 2 -->
+      <section id="step-2" class="step-slide" data-q="q2">
+        <div class="quiz-card glowing-card">
+          <div class="quiz-card-header">
+            <span class="quiz-num-badge">🔍 Задача 2 из 3</span>
+            <span class="badge">Генеалогия vs Ареал</span>
+          </div>
+
+          <h2 class="quiz-question-title">Генеалогия против ареала</h2>
+          
+          <div class="quiz-condition-box">
+            В японском языке тысячи заимствований из китайского и используется китайская иероглифика (кандзи), но грамматика строится на суффиксах.<br>
+            <em>Являются ли эти языки генеалогически родственными?</em>
+          </div>
+
+          <!-- Иллюстрация 2: Ареал vs Генеалогия -->
+          <div class="illustration-box">
+            <svg viewBox="0 0 360 90" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <!-- Древо Китая (Dull Pink) -->
+              <rect x="15" y="10" width="130" height="42" rx="8" fill="#DD8C96" />
+              <text x="80" y="28" fill="#FFFFFF" font-size="12" font-weight="bold" text-anchor="middle">Китайский</text>
+              <text x="80" y="44" fill="#FDF3F4" font-size="9" text-anchor="middle">Сино-тибетская семья</text>
+
+              <!-- Древо Японии (Rhino) -->
+              <rect x="215" y="10" width="130" height="42" rx="8" fill="#2E4060" />
+              <text x="280" y="28" fill="#FFFFFF" font-size="12" font-weight="bold" text-anchor="middle">Японский</text>
+              <text x="280" y="44" fill="#F4DAD4" font-size="9" text-anchor="middle">Японо-рюкюская семья</text>
+
+              <!-- Мост заимствований (Вишнёвый) -->
+              <path d="M 148 31 L 210 31" stroke="#8B112C" stroke-width="3" stroke-dasharray="4 2"/>
+              <polygon points="148,27 140,31 148,35" fill="#8B112C"/>
+              <polygon points="210,27 218,31 210,35" fill="#8B112C"/>
+              
+              <rect x="110" y="60" width="140" height="22" rx="4" fill="#FCECEF" stroke="#E8A8B6"/>
+              <text x="180" y="75" fill="#8B112C" font-size="9.5" font-weight="bold" text-anchor="middle">Ареальный контакт ⚡</text>
+            </svg>
+            <div class="illustration-caption">Культурный контакт и письмо не означают общего предка (разные языковые семьи!)</div>
+          </div>
+
+          <!-- Варианты ответа -->
+          <div class="options-group">
+            <button type="button" class="option-btn" data-opt="opt1" onclick="selectStudentOption('q2', 'opt1', this)">
+              <span class="option-letter">A</span>
+              <span>Нет, это результат ареального контакта при разном происхождении</span>
+            </button>
+            <button type="button" class="option-btn" data-opt="opt2" onclick="selectStudentOption('q2', 'opt2', this)">
+              <span class="option-letter">B</span>
+              <span>Да, оба относятся к сино-тибетской языковой семье</span>
+            </button>
+            <button type="button" class="option-btn" data-opt="opt3" onclick="selectStudentOption('q2', 'opt3', this)">
+              <span class="option-letter">C</span>
+              <span>Да, так как у них общий праязык</span>
+            </button>
+          </div>
+
+          <!-- Статистика и комментарий после выбора -->
+          <div id="feedback-q2" class="answer-feedback-box">
+            <div class="feedback-title">
+              <span>📊 Распределение ответов аудитории:</span>
+            </div>
+            
+            <div class="mini-chart">
+              <div class="mini-chart-row" data-opt="opt1">
+                <div class="mini-chart-info"><span>Нет, ареальный контакт (A)</span><span class="pct">0%</span></div>
+                <div class="mini-progress-track"><div class="mini-progress-fill correct" style="width: 0%;"></div></div>
+              </div>
+              <div class="mini-chart-row" data-opt="opt2">
+                <div class="mini-chart-info"><span>Да, сино-тибетская (B)</span><span class="pct">0%</span></div>
+                <div class="mini-progress-track"><div class="mini-progress-fill" style="width: 0%;"></div></div>
+              </div>
+              <div class="mini-chart-row" data-opt="opt3">
+                <div class="mini-chart-info"><span>Да, общий праязык (C)</span><span class="pct">0%</span></div>
+                <div class="mini-progress-track"><div class="mini-progress-fill" style="width: 0%;"></div></div>
+              </div>
+            </div>
+
+            <div class="feedback-explanation" style="margin-top:12px;">
+              💡 <strong>Разбор:</strong> Японский и китайский происходят от совершенно разных предков. Заимствование иероглифов и слов произошло в результате многовекового культурного взаимодействия (ареальный контакт).
+            </div>
+          </div>
+
+          <div class="action-btn-row">
+            <button class="btn-nav btn-prev" onclick="goToStep(1)">← Назад</button>
+            <button id="btn-next-2" class="btn-nav btn-next" onclick="goToStep(3)" disabled>
+              <span>К вопросу 3 →</span>
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <!-- СЛАЙД 3: ЗАДАЧА 3 -->
+      <section id="step-3" class="step-slide" data-q="q3">
+        <div class="quiz-card glowing-card">
+          <div class="quiz-card-header">
+            <span class="quiz-num-badge">🔍 Задача 3 из 3</span>
+            <span class="badge badge-cherry">Типология</span>
+          </div>
+
+          <h2 class="quiz-question-title">Типологический параллелизм</h2>
+          
+          <div class="quiz-condition-box">
+            Какое явление в современном английском языке типологически сближает его с изолирующим китайским?
+          </div>
+
+          <!-- Иллюстрация 3: Конверсия (Rhino vs Вишня) -->
+          <div class="illustration-box">
+            <svg viewBox="0 0 360 85" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <!-- Блок Английский (Rhino) -->
+              <rect x="15" y="15" width="150" height="48" rx="8" fill="#2E4060"/>
+              <text x="90" y="34" fill="#FFFFFF" font-size="12" font-weight="bold" text-anchor="middle">work (сущ.) ⇄ work (гл.)</text>
+              <text x="90" y="52" fill="#F4DAD4" font-size="9" text-anchor="middle">Конверсия без аффиксов</text>
+
+              <!-- Двусторонняя связь (Dull Pink) -->
+              <path d="M 170 39 L 190 39" stroke="#DD8C96" stroke-width="3"/>
+              
+              <!-- Блок Китайский (Вишня) -->
+              <rect x="195" y="15" width="150" height="48" rx="8" fill="#8B112C"/>
+              <text x="270" y="34" fill="#FFFFFF" font-size="12" font-weight="bold" text-anchor="middle">我看书 (S + V + O)</text>
+              <text x="270" y="52" fill="#FCECEF" font-size="9" text-anchor="middle">Порядок слов</text>
+            </svg>
+            <div class="illustration-caption">В обоих языках грамматическая функция слова зависит от позиции во фразе</div>
+          </div>
+
+          <!-- Варианты ответа -->
+          <div class="options-group">
+            <button type="button" class="option-btn" data-opt="opt1" onclick="selectStudentOption('q3', 'opt1', this)">
+              <span class="option-letter">A</span>
+              <span>Конверсия (work — to work: смена части речи без изменения формы)</span>
+            </button>
+            <button type="button" class="option-btn" data-opt="opt2" onclick="selectStudentOption('q3', 'opt2', this)">
+              <span class="option-letter">B</span>
+              <span>Наличие артиклей (a / the)</span>
+            </button>
+            <button type="button" class="option-btn" data-opt="opt3" onclick="selectStudentOption('q3', 'opt3', this)">
+              <span class="option-letter">C</span>
+              <span>Чередование гласных в корне (sing — sang — sung)</span>
+            </button>
+          </div>
+
+          <!-- Статистика и комментарий после выбора -->
+          <div id="feedback-q3" class="answer-feedback-box">
+            <div class="feedback-title">
+              <span>📊 Распределение ответов аудитории:</span>
+            </div>
+            
+            <div class="mini-chart">
+              <div class="mini-chart-row" data-opt="opt1">
+                <div class="mini-chart-info"><span>Конверсия (A)</span><span class="pct">0%</span></div>
+                <div class="mini-progress-track"><div class="mini-progress-fill correct" style="width: 0%;"></div></div>
+              </div>
+              <div class="mini-chart-row" data-opt="opt2">
+                <div class="mini-chart-info"><span>Артикли (B)</span><span class="pct">0%</span></div>
+                <div class="mini-progress-track"><div class="mini-progress-fill" style="width: 0%;"></div></div>
+              </div>
+              <div class="mini-chart-row" data-opt="opt3">
+                <div class="mini-chart-info"><span>Чередование гласных (C)</span><span class="pct">0%</span></div>
+                <div class="mini-progress-track"><div class="mini-progress-fill" style="width: 0%;"></div></div>
+              </div>
+            </div>
+
+            <div class="feedback-explanation" style="margin-top:12px;">
+              💡 <strong>Разбор:</strong> В китайском языке нет окончаний, слово может быть и существительным, и глаголом в зависимости от контекста. В английском утрата окончаний привела к конверсии — идентичному грамматическому механизму!
+            </div>
+          </div>
+
+          <div class="action-btn-row">
+            <button class="btn-nav btn-prev" onclick="goToStep(2)">← Назад</button>
+            <button id="btn-next-3" class="btn-nav btn-next" onclick="goToStep(4)" disabled>
+              <span>Завершить практикум 🏁</span>
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <!-- СЛАЙД 4: ФИНАЛ И СКАЧИВАНИЕ PDF СО СВЕТЯЩЕЙСЯ АУРОЙ -->
+      <section id="step-4" class="step-slide">
+        <div class="finish-card glowing-card">
+          <div class="finish-icon">🎓</div>
+          <h2>Практикум завершён!</h2>
+          <p>
+            Вы успешно ответили на все 3 лингвистические задачи.<br>
+            Скачайте методический навигатор для подготовки к семинару:
+          </p>
+
+          <a id="btn-download-pdf" href="konspekt.pdf" download="Классификация_языков_Навигатор.pdf" class="btn-download-pdf">
+            <span>Скачать навигатор (PDF)</span>
+            <span style="font-size:20px;">💙🍒</span>
+          </a>
+
+          <div id="download-msg" class="download-success-msg">
+            Спасибо! Файл скачивается. Синие и вишнёвые сердечки уже летят на проектор! 💙🍒
+          </div>
+
+          <div style="margin-top: 24px; padding-top: 16px; border-top: 1px dashed rgba(221, 140, 150, 0.35); font-size: 13px; color: var(--text-muted);">
+            📄 <strong>В навигаторе внутри:</strong> матрица морфологических типов, сводная карта семей и глоссарий из 12 базовых терминов.
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="app-footer">
+      <p>Интерактивный стенд лекции • Кафедра теории и методики преподавания</p>
+      <p style="margin-top:6px;">
+        <a href="?screen=projector">Переключить на экран проектора</a>
+      </p>
+    </footer>
+  </div>
+
+  <!-- ========================================================================
+       ЭКРАН ПРОЕКТОРА (?screen=projector) ДЛЯ ЛЕКТОРА
+       ======================================================================== -->
+  <div id="projector-screen" class="view-container projector-view" style="display: none;">
+    
+    <!-- Навигационные вкладки для лектора -->
+    <nav class="projector-nav-tabs">
+      <button class="proj-tab-btn active" onclick="switchProjectorTab(1)">Задача 1: Морфология</button>
+      <button class="proj-tab-btn" onclick="switchProjectorTab(2)">Задача 2: Ареал vs Родство</button>
+      <button class="proj-tab-btn" onclick="switchProjectorTab(3)">Задача 3: Конверсия</button>
+      <button class="proj-tab-btn" onclick="switchProjectorTab(4)">Финальный навигатор 💙🍒</button>
+    </nav>
+
+    <header class="projector-header glowing-card">
+      <div class="projector-title">
+        <div class="badge badge-live">Режим аудитории • Live Sync</div>
+        <h1>Классификация языков: статистика аудитории</h1>
+        <p>Нажимайте клавиши ← и → на клавиатуре для переключения слайдов</p>
+      </div>
+
+      <div style="display: flex; gap: 14px; align-items: center; flex-wrap: wrap;">
+        <div class="metric-badge">
+          <span>Студентов:</span>
+          <span id="proj-metric-students" class="metric-value">0</span>
+        </div>
+        <div class="metric-badge">
+          <span>Скачиваний:</span>
+          <span id="proj-metric-downloads" class="metric-value metric-heart">0</span>
+        </div>
+        <button id="btn-toggle-correct" class="btn-toggle-answers" onclick="toggleProjectorCorrect()">
+          <span>👁️ Показать верный ответ</span>
+        </button>
+      </div>
+    </header>
+
+    <!-- Слайд 1 на проекторе -->
+    <section id="proj-slide-1" class="projector-focus-slide glowing-card active">
+      <div class="focus-grid">
+        <div class="focus-left">
+          <div class="badge badge-cherry">Задача 1</div>
+          <h2>Морфологическая диагностика (Алтайская семья)</h2>
+          <div class="focus-condition">
+            Татарский язык:<br>
+            <strong>кыз</strong> (девочка) → <strong>кыз-лар</strong> (девочки) → <strong>кыз-лар-га</strong> (девочкам).
+          </div>
+          <!-- Векторная схема на проекторе -->
+          <div class="illustration-box">
+            <svg viewBox="0 0 360 85" fill="none" style="max-width:420px;">
+              <rect x="10" y="15" width="95" height="45" rx="8" fill="#2E4060" />
+              <text x="57" y="38" fill="#FFFFFF" font-size="13" font-weight="bold" text-anchor="middle">кыз</text>
+              <text x="57" y="52" fill="#F4DAD4" font-size="9" text-anchor="middle">КОРЕНЬ</text>
+              <line x1="105" y1="37" x2="125" y2="37" stroke="#DD8C96" stroke-width="4" stroke-dasharray="2 2"/>
+              <circle cx="115" cy="37" r="4" fill="#DD8C96"/>
+              <rect x="125" y="15" width="95" height="45" rx="8" fill="#8B112C" />
+              <text x="172" y="38" fill="#FFFFFF" font-size="13" font-weight="bold" text-anchor="middle">-лар</text>
+              <text x="172" y="52" fill="#FCECEF" font-size="9" text-anchor="middle">МН. ЧИСЛО</text>
+              <line x1="220" y1="37" x2="240" y2="37" stroke="#DD8C96" stroke-width="4" stroke-dasharray="2 2"/>
+              <circle cx="230" cy="37" r="4" fill="#DD8C96"/>
+              <rect x="240" y="15" width="105" height="45" rx="8" fill="#DD8C96" />
+              <text x="292" y="38" fill="#FFFFFF" font-size="13" font-weight="bold" text-anchor="middle">-га</text>
+              <text x="292" y="52" fill="#FDF4F5" font-size="9" text-anchor="middle">ДАТ. ПАДЕЖ</text>
+            </svg>
+          </div>
+        </div>
+
+        <div class="focus-chart-container" id="proj-chart-q1">
+          <div class="focus-chart-row is-correct-row" data-opt="opt1">
+            <div class="focus-chart-info">
+              <span>Агглютинативный <span class="correct-badge-proj">✓ Верно</span></span>
+              <span class="focus-chart-count"><span class="cnt">0</span> (<span class="pct">0%</span>)</span>
+            </div>
+            <div class="focus-progress-track"><div class="focus-progress-fill" style="width: 0%;"></div></div>
+          </div>
+
+          <div class="focus-chart-row" data-opt="opt2">
+            <div class="focus-chart-info">
+              <span>Флективный</span>
+              <span class="focus-chart-count"><span class="cnt">0</span> (<span class="pct">0%</span>)</span>
+            </div>
+            <div class="focus-progress-track"><div class="focus-progress-fill" style="width: 0%;"></div></div>
+          </div>
+
+          <div class="focus-chart-row" data-opt="opt3">
+            <div class="focus-chart-info">
+              <span>Изолирующий</span>
+              <span class="focus-chart-count"><span class="cnt">0</span> (<span class="pct">0%</span>)</span>
+            </div>
+            <div class="focus-progress-track"><div class="focus-progress-fill" style="width: 0%;"></div></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Слайд 2 на проекторе -->
+    <section id="proj-slide-2" class="projector-focus-slide glowing-card">
+      <div class="focus-grid">
+        <div class="focus-left">
+          <div class="badge">Задача 2</div>
+          <h2>Генеалогия против ареала</h2>
+          <div class="focus-condition">
+            Японский и китайский:<br>
+            Тысячи заимствований и иероглифы кандзи, но грамматика на цепочках суффиксов.
+          </div>
+          <div class="illustration-box">
+            <svg viewBox="0 0 360 90" fill="none" style="max-width:420px;">
+              <rect x="15" y="10" width="130" height="42" rx="8" fill="#DD8C96" />
+              <text x="80" y="28" fill="#FFFFFF" font-size="12" font-weight="bold" text-anchor="middle">Китайский</text>
+              <text x="80" y="44" fill="#FDF3F4" font-size="9" text-anchor="middle">Сино-тибетская семья</text>
+              <rect x="215" y="10" width="130" height="42" rx="8" fill="#2E4060" />
+              <text x="280" y="28" fill="#FFFFFF" font-size="12" font-weight="bold" text-anchor="middle">Японский</text>
+              <text x="280" y="44" fill="#F4DAD4" font-size="9" text-anchor="middle">Японо-рюкюская семья</text>
+              <path d="M 148 31 L 210 31" stroke="#8B112C" stroke-width="3" stroke-dasharray="4 2"/>
+              <polygon points="148,27 140,31 148,35" fill="#8B112C"/>
+              <polygon points="210,27 218,31 210,35" fill="#8B112C"/>
+              <rect x="110" y="60" width="140" height="22" rx="4" fill="#FCECEF" stroke="#E8A8B6"/>
+              <text x="180" y="75" fill="#8B112C" font-size="9.5" font-weight="bold" text-anchor="middle">Ареальный контакт ⚡</text>
+            </svg>
+          </div>
+        </div>
+
+        <div class="focus-chart-container" id="proj-chart-q2">
+          <div class="focus-chart-row is-correct-row" data-opt="opt1">
+            <div class="focus-chart-info">
+              <span>Нет, ареальный контакт <span class="correct-badge-proj">✓ Верно</span></span>
+              <span class="focus-chart-count"><span class="cnt">0</span> (<span class="pct">0%</span>)</span>
+            </div>
+            <div class="focus-progress-track"><div class="focus-progress-fill" style="width: 0%;"></div></div>
+          </div>
+
+          <div class="focus-chart-row" data-opt="opt2">
+            <div class="focus-chart-info">
+              <span>Да, сино-тибетская семья</span>
+              <span class="focus-chart-count"><span class="cnt">0</span> (<span class="pct">0%</span>)</span>
+            </div>
+            <div class="focus-progress-track"><div class="focus-progress-fill" style="width: 0%;"></div></div>
+          </div>
+
+          <div class="focus-chart-row" data-opt="opt3">
+            <div class="focus-chart-info">
+              <span>Да, общий праязык</span>
+              <span class="focus-chart-count"><span class="cnt">0</span> (<span class="pct">0%</span>)</span>
+            </div>
+            <div class="focus-progress-track"><div class="focus-progress-fill" style="width: 0%;"></div></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Слайд 3 на проекторе -->
+    <section id="proj-slide-3" class="projector-focus-slide glowing-card">
+      <div class="focus-grid">
+        <div class="focus-left">
+          <div class="badge badge-cherry">Задача 3</div>
+          <h2>Типологический параллелизм (Английский & Китайский)</h2>
+          <div class="focus-condition">
+            Что типологически сближает аналитический английский с изолирующим китайским?
+          </div>
+          <div class="illustration-box">
+            <svg viewBox="0 0 360 85" fill="none" style="max-width:420px;">
+              <rect x="15" y="15" width="150" height="48" rx="8" fill="#2E4060"/>
+              <text x="90" y="34" fill="#FFFFFF" font-size="12" font-weight="bold" text-anchor="middle">work (сущ.) ⇄ work (гл.)</text>
+              <text x="90" y="52" fill="#F4DAD4" font-size="9" text-anchor="middle">Конверсия без аффиксов</text>
+              <path d="M 170 39 L 190 39" stroke="#DD8C96" stroke-width="3"/>
+              <rect x="195" y="15" width="150" height="48" rx="8" fill="#8B112C"/>
+              <text x="270" y="34" fill="#FFFFFF" font-size="12" font-weight="bold" text-anchor="middle">我看书 (S + V + O)</text>
+              <text x="270" y="52" fill="#FCECEF" font-size="9" text-anchor="middle">Порядок слов</text>
+            </svg>
+          </div>
+        </div>
+
+        <div class="focus-chart-container" id="proj-chart-q3">
+          <div class="focus-chart-row is-correct-row" data-opt="opt1">
+            <div class="focus-chart-info">
+              <span>Конверсия (work — to work) <span class="correct-badge-proj">✓ Верно</span></span>
+              <span class="focus-chart-count"><span class="cnt">0</span> (<span class="pct">0%</span>)</span>
+            </div>
+            <div class="focus-progress-track"><div class="focus-progress-fill" style="width: 0%;"></div></div>
+          </div>
+
+          <div class="focus-chart-row" data-opt="opt2">
+            <div class="focus-chart-info">
+              <span>Артикли (a / the)</span>
+              <span class="focus-chart-count"><span class="cnt">0</span> (<span class="pct">0%</span>)</span>
+            </div>
+            <div class="focus-progress-track"><div class="focus-progress-fill" style="width: 0%;"></div></div>
+          </div>
+
+          <div class="focus-chart-row" data-opt="opt3">
+            <div class="focus-chart-info">
+              <span>Чередование гласных (sing/sang)</span>
+              <span class="focus-chart-count"><span class="cnt">0</span> (<span class="pct">0%</span>)</span>
+            </div>
+            <div class="focus-progress-track"><div class="focus-progress-fill" style="width: 0%;"></div></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Слайд 4 на проекторе (Счетчик скачиваний) -->
+    <section id="proj-slide-4" class="projector-focus-slide glowing-card proj-final-slide">
+      <div class="badge">Материалы к семинару</div>
+      <h2 style="font-size:2rem; font-weight:800; color:var(--rhino); margin-top:10px;">
+        Скачивание методического навигатора
+      </h2>
+      <p style="font-size:1.15rem; color:var(--text-muted); margin-top:8px;">
+        Студенты нажимают кнопку скачивания на смартфонах — сердечки взлетают на проекторе:
+      </p>
+
+      <div class="proj-big-counter">
+        <span id="proj-big-downloads-num">0</span> <span style="font-size:3.5rem;">💙🍒</span>
+      </div>
+
+      <p style="font-size:1rem; color:#475569;">
+        Методический навигатор (PDF): 12 терминов, матрица морфологических типов и карта языковых семей
+      </p>
+
+      <div style="margin-top:30px;">
+        <button class="btn-toggle-answers" onclick="launchHearts(35)">
+          <span>Запустить салют сердечек (Тест) 💙🍒</span>
+        </button>
+      </div>
+    </section>
+
+    <footer class="app-footer">
+      <p>Стенд обновляется каждые 2.5 сек • <a href="?">Открыть режим студента</a></p>
+    </footer>
+  </div>
+
+  <!-- ========================================================================
+       СКРИПТ ПРИЛОЖЕНИЯ
+       ======================================================================== -->
+  <script>
+    /* ========================================================================
+       КОНФИГУРАЦИЯ БЭКЕНДА
+       Ваш рабочий развернутый Google Apps Script Web App:
+       ======================================================================== */
+    const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwNKtuxsz65FpKMh6jI5zGeDWieUiWVC91yMxBVg0qBvP_d50TtQtlbrAy1UxNBtBGu/exec';
+
+    const urlParams = new URLSearchParams(window.location.search);
+    const isProjector = urlParams.get('screen') === 'projector';
+
+    let studentId = localStorage.getItem('lingvo_student_id');
+    if (!studentId) {
+      studentId = 'sid_' + Math.random().toString(36).substring(2, 9) + '_' + Date.now();
+      localStorage.setItem('lingvo_student_id', studentId);
+    }
+
+    let studentAnswers = { q1: null, q2: null, q3: null };
+    try {
+      const saved = localStorage.getItem('lingvo_student_answers');
+      if (saved) studentAnswers = JSON.parse(saved);
+    } catch (e) {}
+
+    let currentStep = 1;
+    let currentProjTab = 1;
+    let lastDownloadCount = 0;
+    let showCorrect = false;
+
+    /* ========================================================================
+       1. ДВУХЦВЕТНАЯ СИСТЕМА СЕРДЕЧЕК СО СВЕТЯЩИМСЯ ОРЕОЛОМ (CANVAS GLOW)
+       ======================================================================== */
+    const canvas = document.getElementById('hearts-canvas');
+    const ctx = canvas.getContext('2d');
+    let particles = [];
+    let animationFrameId = null;
+
+    function resizeCanvas() {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    }
+    window.addEventListener('resize', resizeCanvas);
+    resizeCanvas();
+
+    class HeartParticle {
+      constructor(originX, originY) {
+        this.x = originX !== undefined ? originX + (Math.random() * 80 - 40) : Math.random() * canvas.width;
+        this.y = originY !== undefined ? originY : canvas.height + 20;
+        this.size = Math.random() * 20 + 14;
+        this.speedY = -(Math.random() * 3.8 + 2.3);
+        this.speedX = Math.random() * 2.8 - 1.4;
+        this.wiggleSpeed = Math.random() * 0.05 + 0.02;
+        this.wiggleDistance = Math.random() * 2.2 + 1;
+        this.angle = Math.random() * Math.PI;
+        this.opacity = 1;
+        this.fade = Math.random() * 0.008 + 0.005;
+
+        // Двухцветная палитра: глубокие синие (Rhino) и вишнёвые (Cherry)
+        const blueTones = ['#2E4060', '#1F2F4A', '#3D5680', '#4E6B9E', '#263753'];
+        const cherryTones = ['#8B112C', '#700921', '#9C1C36', '#800020', '#B32547'];
+        
+        if (Math.random() > 0.5) {
+          this.color = blueTones[Math.floor(Math.random() * blueTones.length)];
+        } else {
+          this.color = cherryTones[Math.floor(Math.random() * cherryTones.length)];
+        }
+      }
+
+      update() {
+        this.y += this.speedY;
+        this.angle += this.wiggleSpeed;
+        this.x += Math.sin(this.angle) * this.wiggleDistance + this.speedX;
+        this.opacity -= this.fade;
+      }
+
+      draw() {
+        if (this.opacity <= 0) return;
+        ctx.save();
+        ctx.globalAlpha = Math.max(0, this.opacity);
+        ctx.translate(this.x, this.y);
+        
+        // Эффект светящегося ореола частицы
+        ctx.shadowBlur = 10;
+        ctx.shadowColor = this.color;
+        ctx.fillStyle = this.color;
+        
+        const s = this.size / 22;
+        ctx.beginPath();
+        ctx.moveTo(0, 0);
+        ctx.bezierCurveTo(-10 * s, -10 * s, -20 * s, 5 * s, 0, 20 * s);
+        ctx.bezierCurveTo(20 * s, 5 * s, 10 * s, -10 * s, 0, 0);
+        ctx.fill();
+        ctx.restore();
+      }
+    }
+
+    function launchHearts(count = 25, originX, originY) {
+      for (let i = 0; i < count; i++) {
+        particles.push(new HeartParticle(originX, originY));
+      }
+      if (!animationFrameId) animateParticles();
+    }
+
+    function animateParticles() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      for (let i = particles.length - 1; i >= 0; i--) {
+        const p = particles[i];
+        p.update();
+        p.draw();
+        if (p.opacity <= 0 || p.y < -60) {
+          particles.splice(i, 1);
+        }
+      }
+      if (particles.length > 0) {
+        animationFrameId = requestAnimationFrame(animateParticles);
+      } else {
+        animationFrameId = null;
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+      }
+    }
+
+    /* ========================================================================
+       2. ЛОГИКА РЕЖИМА СТУДЕНТА (ПОШАГОВОЕ ПЕРЕКЛЮЧЕНИЕ)
+       ======================================================================== */
+    function initStudentMode() {
+      document.getElementById('student-screen').style.display = 'block';
+
+      // Восстанавливаем ранее выбранные ответы, если они были
+      ['q1', 'q2', 'q3'].forEach((q, idx) => {
+        const val = studentAnswers[q];
+        if (val) {
+          const btn = document.querySelector(`#step-${idx + 1} .option-btn[data-opt="${val}"]`);
+          if (btn) {
+            btn.classList.add('selected');
+            document.getElementById(`btn-next-${idx + 1}`).disabled = false;
+            document.getElementById(`feedback-${q}`).style.display = 'block';
+          }
+        }
+      });
+
+      goToStep(1);
+
+      // Скачивание PDF + Двухцветный салют сердечек (Синие + Вишнёвые)
+      const btnDownload = document.getElementById('btn-download-pdf');
+      btnDownload.addEventListener('click', (e) => {
+        const rect = btnDownload.getBoundingClientRect();
+        launchHearts(35, rect.left + rect.width / 2, rect.top + rect.height / 2);
+
+        document.getElementById('download-msg').style.display = 'block';
+        btnDownload.style.pointerEvents = 'none';
+        btnDownload.style.opacity = '0.7';
+        setTimeout(() => {
+          btnDownload.style.pointerEvents = 'auto';
+          btnDownload.style.opacity = '1';
+        }, 3000);
+
+        // Отправка в Google Apps Script
+        if (SCRIPT_URL) {
+          fetch(SCRIPT_URL, {
+            method: 'POST',
+            headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+            body: JSON.stringify({ action: 'increment_download' })
+          }).catch(console.error);
+        }
+      });
+    }
+
+    function goToStep(step) {
+      if (step < 1 || step > 4) return;
+      currentStep = step;
+
+      document.querySelectorAll('.step-slide').forEach(s => s.classList.remove('active'));
+      const activeSlide = document.getElementById(`step-${step}`);
+      if (activeSlide) activeSlide.classList.add('active');
+
+      document.querySelectorAll('.step-node').forEach(node => {
+        const nStep = parseInt(node.dataset.step);
+        node.classList.remove('active');
+        if (nStep === step) node.classList.add('active');
+        if (nStep < step) node.classList.add('completed');
+        else node.classList.remove('completed');
+      });
+
+      const progressPct = ((step - 1) / 3) * 100;
+      document.getElementById('stepper-progress').style.width = `calc(${progressPct}% - 40px * ${progressPct/100})`;
+
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+
+      if (step <= 3) {
+        updateSingleQuestionStats(`q${step}`);
+      }
+    }
+
+    async function selectStudentOption(question, option, btnElement) {
+      const parentSlide = btnElement.closest('.step-slide');
+      parentSlide.querySelectorAll('.option-btn').forEach(b => b.classList.remove('selected'));
+      btnElement.classList.add('selected');
+
+      studentAnswers[question] = option;
+      localStorage.setItem('lingvo_student_answers', JSON.stringify(studentAnswers));
+
+      const stepNum = question === 'q1' ? 1 : (question === 'q2' ? 2 : 3);
+      const nextBtn = document.getElementById(`btn-next-${stepNum}`);
+      if (nextBtn) nextBtn.disabled = false;
+
+      const feedbackBox = document.getElementById(`feedback-${question}`);
+      if (feedbackBox) feedbackBox.style.display = 'block';
+
+      if (SCRIPT_URL) {
+        try {
+          fetch(SCRIPT_URL, {
+            method: 'POST',
+            headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+            body: JSON.stringify({
+              action: 'vote_step',
+              studentId: studentId,
+              question: question,
+              option: option
+            })
+          }).then(() => updateSingleQuestionStats(question)).catch(console.error);
+        } catch (e) {
+          console.error(e);
+        }
+      } else {
+        renderLocalMockStats(question);
+      }
+    }
+
+    async function updateSingleQuestionStats(question) {
+      if (!SCRIPT_URL) {
+        renderLocalMockStats(question);
+        return;
+      }
+      try {
+        const resp = await fetch(SCRIPT_URL);
+        const data = await resp.json();
+        if (data && data.stats && data.stats[question]) {
+          renderQuestionMiniChart(question, data.stats[question]);
+        }
+      } catch (e) {
+        renderLocalMockStats(question);
+      }
+    }
+
+    function renderQuestionMiniChart(q, qStats) {
+      const total = (qStats.opt1 || 0) + (qStats.opt2 || 0) + (qStats.opt3 || 0);
+      ['opt1', 'opt2', 'opt3'].forEach(opt => {
+        const row = document.querySelector(`#feedback-${q} .mini-chart-row[data-opt="${opt}"]`);
+        if (row) {
+          const count = qStats[opt] || 0;
+          const pct = total > 0 ? Math.round((count / total) * 100) : 0;
+          row.querySelector('.pct').textContent = pct + '%';
+          row.querySelector('.mini-progress-fill').style.width = pct + '%';
+        }
+      });
+    }
+
+    function renderLocalMockStats(q) {
+      const mock = {
+        q1: { opt1: 18, opt2: 3, opt3: 1 },
+        q2: { opt1: 21, opt2: 4, opt3: 2 },
+        q3: { opt1: 24, opt2: 2, opt3: 1 }
+      };
+      renderQuestionMiniChart(q, mock[q] || { opt1: 10, opt2: 2, opt3: 1 });
+    }
+
+    /* ========================================================================
+       3. ЛОГИКА РЕЖИМА ПРОЕКТОРА ДЛЯ ЛЕКТОРА (?screen=projector)
+       ======================================================================== */
+    function initProjectorMode() {
+      document.getElementById('projector-screen').style.display = 'block';
+
+      window.addEventListener('keydown', (e) => {
+        if (e.key === 'ArrowRight') switchProjectorTab(Math.min(4, currentProjTab + 1));
+        if (e.key === 'ArrowLeft') switchProjectorTab(Math.max(1, currentProjTab - 1));
+      });
+
+      syncProjector();
+      setInterval(syncProjector, 2500);
+    }
+
+    function switchProjectorTab(tabIndex) {
+      currentProjTab = tabIndex;
+      document.querySelectorAll('.proj-tab-btn').forEach((btn, idx) => {
+        btn.classList.toggle('active', idx + 1 === tabIndex);
+      });
+      document.querySelectorAll('.projector-focus-slide').forEach((slide, idx) => {
+        slide.classList.toggle('active', idx + 1 === tabIndex);
+      });
+    }
+
+    async function syncProjector() {
+      if (!SCRIPT_URL) {
+        renderProjectorData({
+          downloads: lastDownloadCount || 0,
+          totalStudents: 28,
+          stats: {
+            q1: { opt1: 22, opt2: 4, opt3: 2 },
+            q2: { opt1: 24, opt2: 3, opt3: 1 },
+            q3: { opt1: 25, opt2: 2, opt3: 1 }
+          }
+        });
+        return;
+      }
+
+      try {
+        const resp = await fetch(SCRIPT_URL);
+        const data = await resp.json();
+        if (data && data.status === 'success') {
+          renderProjectorData(data);
+        }
+      } catch (err) {
+        console.error('Ошибка синхронизации проектора:', err);
+      }
+    }
+
+    function renderProjectorData(data) {
+      document.getElementById('proj-metric-students').textContent = data.totalStudents || 0;
+      
+      const downloads = data.downloads || 0;
+      document.getElementById('proj-metric-downloads').textContent = downloads;
+      const bigCounter = document.getElementById('proj-big-downloads-num');
+      if (bigCounter) bigCounter.textContent = downloads;
+
+      if (downloads > lastDownloadCount) {
+        if (lastDownloadCount > 0) {
+          const diff = Math.min(downloads - lastDownloadCount, 25);
+          launchHearts(diff * 14);
+        }
+        lastDownloadCount = downloads;
+      } else if (lastDownloadCount === 0) {
+        lastDownloadCount = downloads;
+      }
+
+      ['q1', 'q2', 'q3'].forEach(q => {
+        const qStats = (data.stats && data.stats[q]) || { opt1: 0, opt2: 0, opt3: 0 };
+        const total = (qStats.opt1 || 0) + (qStats.opt2 || 0) + (qStats.opt3 || 0);
+
+        ['opt1', 'opt2', 'opt3'].forEach(opt => {
+          const row = document.querySelector(`#proj-chart-${q} .focus-chart-row[data-opt="${opt}"]`);
+          if (row) {
+            const count = qStats[opt] || 0;
+            const pct = total > 0 ? Math.round((count / total) * 100) : 0;
+            row.querySelector('.cnt').textContent = count;
+            row.querySelector('.pct').textContent = pct + '%';
+            
+            const fill = row.querySelector('.focus-progress-fill');
+            fill.style.width = pct + '%';
+
+            if (showCorrect && row.classList.contains('is-correct-row')) {
+              fill.classList.add('correct');
+            } else {
+              fill.classList.remove('correct');
+            }
+          }
+        });
+      });
+    }
+
+    function toggleProjectorCorrect() {
+      showCorrect = !showCorrect;
+      const btn = document.getElementById('btn-toggle-correct');
+      btn.classList.toggle('active', showCorrect);
+      btn.innerHTML = showCorrect 
+        ? '<span>✓ Скрыть верный ответ</span>' 
+        : '<span>👁️ Показать верный ответ</span>';
+
+      document.querySelectorAll('.projector-focus-slide').forEach(s => {
+        s.classList.toggle('show-correct', showCorrect);
+      });
+      document.querySelectorAll('.is-correct-row .focus-progress-fill').forEach(fill => {
+        fill.classList.toggle('correct', showCorrect);
+      });
+    }
+
+    if (isProjector) {
+      initProjectorMode();
+    } else {
+      initStudentMode();
+    }
+  </script>
+</body>
+</html>
